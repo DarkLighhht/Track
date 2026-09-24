@@ -1,1 +1,178 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VALORANT Tracker</title><link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"></head><body><main class="container"><section class="card hero"><h1>VALORANT Tracker</h1><p>Личная статистика и анализ матчей.</p>{% with m=get_flashed_messages() %}{% for x in m %}<div class="message">{{x}}</div>{% endfor %}{% endwith %}{% if logged_in %}<a class="button" href="{{url_for('profile')}}">Открыть профиль</a>{% else %}<a class="button" href="{{url_for('login')}}">Войти через Riot</a>{% endif %}</section><section class="card"><h2>Riot verification</h2><p><code>/riot.txt</code></p><p class="muted">После публикации: https://твой-домен/riot.txt</p></section></main></body></html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorant Stats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="background-overlay"></div>
+
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-mark">V</span>
+            <span>VALORANT</span>
+            <span class="stats-text">STATS</span>
+        </div>
+        <nav>
+            <a href="#" class="active">Профиль</a>
+            <a href="#">Матчи</a>
+            <a href="#">Агенты</a>
+            <a href="#">Карты</a>
+        </nav>
+        <button class="logout-btn">Выйти</button>
+    </header>
+
+    <main class="container">
+        <section class="profile-header">
+            <div class="profile-left">
+                <div class="avatar"><span>AD</span></div>
+                <div class="player-info">
+                    <div class="online-status"><span class="online-dot"></span>ONLINE</div>
+                    <h1>Artem#EUW</h1>
+                    <p class="region">Europe · PC</p>
+                    <p class="last-update">Последнее обновление: сегодня, 09:42</p>
+                </div>
+            </div>
+
+            <div class="rank-block">
+                <div class="rank-icon">DIAMOND</div>
+                <div>
+                    <span class="rank-label">ТЕКУЩИЙ РАНГ</span>
+                    <h2>Diamond 2</h2>
+                    <span class="rr">147 RR</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-title">K/D RATIO</div>
+                <div class="stat-value accent">1.42</div>
+                <div class="stat-sub">+8.4% за последние 20 игр</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">WIN RATE</div>
+                <div class="stat-value">63%</div>
+                <div class="stat-sub">32 победы / 19 поражений</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">AVG. COMBAT SCORE</div>
+                <div class="stat-value">247</div>
+                <div class="stat-sub">Последние 20 матчей</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">HEADSHOT %</div>
+                <div class="stat-value">27.8%</div>
+                <div class="stat-sub">Средний показатель</div>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <div class="panel matches-panel">
+                <div class="panel-header">
+                    <div>
+                        <span class="section-label">MATCH HISTORY</span>
+                        <h2>Последние матчи</h2>
+                    </div>
+                    <a href="#">Смотреть все →</a>
+                </div>
+
+                <div class="match-list">
+                    <div class="match win">
+                        <div class="match-result"><span class="result-letter">W</span><span>Победа</span></div>
+                        <div class="map"><strong>Ascent</strong><span>Competitive</span></div>
+                        <div class="score">13 <span>:</span> 8</div>
+                        <div class="match-kda"><strong>21 / 14 / 6</strong><span>K / D / A</span></div>
+                        <div class="match-agent"><span>Jett</span></div>
+                    </div>
+                    <div class="match win">
+                        <div class="match-result"><span class="result-letter">W</span><span>Победа</span></div>
+                        <div class="map"><strong>Haven</strong><span>Competitive</span></div>
+                        <div class="score">13 <span>:</span> 10</div>
+                        <div class="match-kda"><strong>24 / 17 / 4</strong><span>K / D / A</span></div>
+                        <div class="match-agent"><span>Omen</span></div>
+                    </div>
+                    <div class="match loss">
+                        <div class="match-result"><span class="result-letter">L</span><span>Поражение</span></div>
+                        <div class="map"><strong>Lotus</strong><span>Competitive</span></div>
+                        <div class="score">9 <span>:</span> 13</div>
+                        <div class="match-kda"><strong>18 / 20 / 7</strong><span>K / D / A</span></div>
+                        <div class="match-agent"><span>Raze</span></div>
+                    </div>
+                    <div class="match win">
+                        <div class="match-result"><span class="result-letter">W</span><span>Победа</span></div>
+                        <div class="map"><strong>Bind</strong><span>Competitive</span></div>
+                        <div class="score">13 <span>:</span> 6</div>
+                        <div class="match-kda"><strong>27 / 11 / 8</strong><span>K / D / A</span></div>
+                        <div class="match-agent"><span>Reyna</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel agents-panel">
+                <div class="panel-header">
+                    <div>
+                        <span class="section-label">AGENTS</span>
+                        <h2>Любимые агенты</h2>
+                    </div>
+                </div>
+
+                <div class="agent-list">
+                    <div class="agent">
+                        <div class="agent-icon jett">J</div>
+                        <div class="agent-info"><strong>Jett</strong><span>27 матчей</span></div>
+                        <div class="agent-kd">1.58</div>
+                    </div>
+                    <div class="agent">
+                        <div class="agent-icon omen">O</div>
+                        <div class="agent-info"><strong>Omen</strong><span>18 матчей</span></div>
+                        <div class="agent-kd">1.31</div>
+                    </div>
+                    <div class="agent">
+                        <div class="agent-icon raze">R</div>
+                        <div class="agent-info"><strong>Raze</strong><span>12 матчей</span></div>
+                        <div class="agent-kd">1.24</div>
+                    </div>
+                    <div class="agent">
+                        <div class="agent-icon reyna">R</div>
+                        <div class="agent-info"><strong>Reyna</strong><span>9 матчей</span></div>
+                        <div class="agent-kd">1.47</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bottom-grid">
+            <div class="panel">
+                <div class="panel-header">
+                    <div><span class="section-label">PERFORMANCE</span><h2>Производительность</h2></div>
+                </div>
+                <div class="performance">
+                    <div class="performance-item"><span>Средние убийства</span><strong>19.7</strong></div>
+                    <div class="performance-item"><span>Средние смерти</span><strong>13.9</strong></div>
+                    <div class="performance-item"><span>Средние ассисты</span><strong>6.4</strong></div>
+                    <div class="performance-item"><span>First Kill Rate</span><strong>14.2%</strong></div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <div><span class="section-label">RANK</span><h2>Прогресс ранга</h2></div>
+                </div>
+                <div class="rank-progress">
+                    <div class="rank-progress-top"><span>Diamond 2</span><strong>147 / 200 RR</strong></div>
+                    <div class="progress-bar"><div class="progress-value"></div></div>
+                    <p>До следующего ранга осталось 53 RR</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <span>VALORANT STATS</span>
+        <span>Данные предоставляются Riot Games API</span>
+    </footer>
+</body>
+</html>
